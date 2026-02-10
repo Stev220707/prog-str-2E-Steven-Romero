@@ -2,25 +2,39 @@ public class Ticket {
 
     private double DESCUENTO = 0.10;
     private double PRECIO = 10;
+    public double subtotal;
+    public double descuentoCalculado;
+    public double total;
 
-    public Ticket(){ //Contructor vacio, si no lo escribes, se crea un par de
+    public Ticket(){ //Constructor vacio, si no lo escribes, se crea un por default
 
     }
 
-    public double calcularSubtotal(int cantidad){
-        return cantidad*PRECIO;
+    public void procesar(int cantidad){
+        calcularSubtotal(cantidad);
+        calcularDescuento(this.subtotal);
+        calcularTotal(this.subtotal);
     }
 
-    public double calcularDescuento(double subtotal){
-        return (subtotal*DESCUENTO);
+    private void calcularSubtotal(int cantidad){
+        this.subtotal=cantidad*PRECIO;
     }
 
-    public double calcularTotal(double subtotal){
-        return subtotal-calcularDescuento(subtotal);
+    private void calcularDescuento(double subtotal){
+        this.descuentoCalculado= this.subtotal*DESCUENTO;
     }
 
-    public void imprimirTicket(int cantidad, double subtotal, double total, double descuento){
+    private void calcularTotal(double subtotal){
+        this.total= this.subtotal - this.descuentoCalculado;
+    }
 
+    public void imprimirTicket(int cantidad){
+        System.out.println("---Ticket---");
+        System.out.println("Cantidad de productos: "+cantidad);
+        System.out.println("Subtotal: "+this.subtotal);
+        System.out.println("Descuento: "+this.descuentoCalculado);
+        System.out.println("Total del ticket: "+this.total);
+        System.out.println("---Ticket---");
     }
 
 
